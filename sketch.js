@@ -1,7 +1,9 @@
 var fps = 60;
+var score = 0;
 var ship;
 var aliensArray = [];
 var bulletArray = [];
+var gameState = 'menu'
 
 function setup() {
 	createCanvas(600, 400);
@@ -15,15 +17,60 @@ function setup() {
 
 function draw() {
   background(0);
+  game();
 
-  //aliens.display();
+
+}
+
+//Funció game on es dtermina l'estat del joc
+function game(){
+  switch(gameState){
+    case 'menu':
+      Menu();
+      break;
+    case 'play':
+      looper();
+      break;
+    case 'gameover':
+      Gameover();
+      break;
+  }
+}
+
+// Funció per pintar el menú
+function Menu(){
+  this.title = 'SQUARES INVADERS';
+  this.description_1 = 'Press A or D to move the ship to the right or to the left';                                                 
+  this.description_2 = 'and press the SPACEBAR to shoot'
+  this.startGame = 'Press ENTER to start the game.'
+
+  // Titol Joc
+  background(0);
+  textSize(40);
+  text(this.title, 100, 70);
+  fill(50, 200, 50);
+
+  // Descripció controls
+  textSize(20);
+  fill(50, 200, 75);
+  text(this.description_1, 50, 200);
+  text(this.description_2, 125, 225);
+
+  // Start game
+  text(this.startGame, 145, 300);
+}
+//funció per pintar la pantalla de gameover
+
+// Funció loop principal
+function looper(){
+    //aliens.display();
   // Mostrar els aliens a pantalla i que facin lo d'anar baixant
   for(var i = 0; i < aliensArray.length; i++){
     if(aliensArray[0].x < 0 || aliensArray[aliensArray.length - 1].x > width - 35){
       aliensArray[i].y += 40;
       aliensArray[i].xSpeed *= -1;
     }
-  	aliensArray[i].display();
+    aliensArray[i].display();
     aliensArray[i].update();
   }
 
@@ -41,7 +88,8 @@ function draw() {
     }
   }
 
-  isColision(bulletArray, aliensArray); 
+  isColision(bulletArray, aliensArray);
+  gameOver(aliensArray, ship); 
 }
 
 
@@ -57,16 +105,32 @@ function isColision(bulletArray, aliensArray){
         console.log("Colision");
         aliensArray.splice(j, 1);
         bulletArray.splice(i, 1);
-        
+        break;
       }
+  }
+}
+
+// Funció que detecta quan un alien toca al ship o arriba al final de la pantalla i
+// finalitza el joc.
+function gameOver(aliensArray, ship){
+  for(var i = 0; i < aliensArray.length; i++){
+    if(ship.x < aliensArray[i].x + 35 && ship.x + 35 > aliensArray[i].x &&
+      ship.y < aliensArray[i].y + 35 && ship.y + 35 > aliensArray[i].y){
+      console.log("GameOver");
+    }
   }
 }
 
 
 window.addEventListener("keydown", function(event){
-    if(event.keyCode == 32){
-      var bullet = new Bullets(ship.x - 17, ship.y);
-      bulletArray.push(bullet);
+  if(event.keyCode == 32){ // 32 == SPACEBAR
+    var bullet = new Bullets(ship.x - 17, ship.y);
+    bulletArray.push(bullet);
   } 
+
+  if(event.keyCode == 13){ // 13 == ENTER
+    gameState = 'play';
+  }
+
 });
 
