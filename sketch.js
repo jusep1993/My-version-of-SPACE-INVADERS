@@ -6,7 +6,7 @@ var bulletArray = [];
 var gameState = 'menu'
 
 function setup() {
-	createCanvas(600, 400);
+	createCanvas(600, 800);
 	frameRate(fps);
 	ship = new Ship();
 	for(var i = 20; i < width - 20; i += 40){

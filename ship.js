@@ -1,6 +1,6 @@
 function Ship(){
 	this.x = 300; 
-	this.y = 345
+	this.y = 735
 	this.xSpeed = 2.5; 					// Velocitat de moviment horitzontal
 	this.health = 3;
 
@@ -8,18 +8,18 @@ function Ship(){
 		noFill();
 		stroke(20, 200, 20);
 		beginShape();			// forma de la nau
-			vertex(this.x - 20, 370); 	// Punt A
-			vertex(this.x - 20, 380);	// Punt B
-			vertex(this.x - 30, 380);	// Punt C
-			vertex(this.x - 30, 360);	// Punt D
-			vertex(this.x - 18, 355);	// Punt E
-			vertex(this.x - 18, 345);	// Punt F 
-			vertex(this.x - 10, 345);	// Punt G
-			vertex(this.x - 10, 355);	// Punt H
-			vertex(this.x,      360);	// Punt I
-			vertex(this.x,      380);	// Punt J 
-			vertex(this.x - 10, 380);	// Punt k 
-			vertex(this.x - 10, 370);	// Punt L 
+			vertex(this.x - 20, 700); 	// Punt A
+			vertex(this.x - 20, 700);	// Punt B
+			vertex(this.x - 30, 700);	// Punt C
+			vertex(this.x - 30, 700);	// Punt D
+			vertex(this.x - 18, 700);	// Punt E
+			vertex(this.x - 18, 700);	// Punt F 
+			vertex(this.x - 10, 700);	// Punt G
+			vertex(this.x - 10, 700);	// Punt H
+			vertex(this.x,      700);	// Punt I
+			vertex(this.x,      700);	// Punt J 
+			vertex(this.x - 10, 700);	// Punt k 
+			vertex(this.x - 10, 700);	// Punt L 
 		endShape(CLOSE);
 	}
 
